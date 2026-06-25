@@ -7,30 +7,42 @@
 <style>
 :root{
   --bg:#07111f;--text:#eef6ff;--muted:#a8b7c9;--card:#101d31;--gold:#fbbf24;
-  --blue:#38bdf8;--green:#22c55e;--line:rgba(255,255,255,.14);
+  --blue:#38bdf8;--green:#22c55e;--line:rgba(255,255,255,.14);--soft:rgba(255,255,255,.07);
 }
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(180deg,#06101f,#10233b 45%,#07111f);color:var(--text);padding-bottom:82px}
-header{padding:26px 16px;text-align:center;background:linear-gradient(135deg,#0b1020,#123b7a,#0f766e)}
-header h1{margin:8px 0;font-size:29px}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(180deg,#06101f,#10233b 45%,#07111f);color:var(--text);padding-bottom:84px}
+header{padding:30px 16px;text-align:center;background:
+radial-gradient(circle at 20% 10%,rgba(56,189,248,.35),transparent 30%),
+radial-gradient(circle at 85% 25%,rgba(251,191,36,.26),transparent 30%),
+linear-gradient(135deg,#0b1020,#123b7a,#0f766e)}
+header h1{margin:8px 0;font-size:31px}
 header p{margin:0;color:#dbeafe}
-.wrap{max-width:1050px;margin:auto;padding:14px}
+.wrap{max-width:1100px;margin:auto;padding:14px}
 .screen{display:none}.screen.active{display:block}
-.card{background:linear-gradient(180deg,var(--card),#0b1728);border:1px solid var(--line);border-radius:22px;padding:18px;margin:14px 0;box-shadow:0 12px 30px rgba(0,0,0,.25)}
+.card{background:linear-gradient(180deg,var(--card),#0b1728);border:1px solid var(--line);border-radius:24px;padding:18px;margin:14px 0;box-shadow:0 12px 30px rgba(0,0,0,.25)}
+.hero-card{border-right:7px solid var(--gold)}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-@media(max-width:760px){.grid{grid-template-columns:1fr} header h1{font-size:24px}}
+.city-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:900px){.city-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.grid,.city-grid{grid-template-columns:1fr} header h1{font-size:25px}}
 .tile{border:0;min-height:126px;border-radius:24px;padding:18px;text-align:right;color:white;font-weight:bold;box-shadow:0 14px 30px rgba(0,0,0,.28);cursor:pointer;width:100%}
 .tile span{display:block;font-size:36px;margin-bottom:8px}.tile b{display:block;font-size:24px}.tile small{display:block;color:#eef6ff;margin-top:4px}
 .blue{background:linear-gradient(135deg,#0284c7,#1d4ed8)}.gold{background:linear-gradient(135deg,#ca8a04,#f97316)}.green{background:linear-gradient(135deg,#0f766e,#16a34a)}.purple{background:linear-gradient(135deg,#7c3aed,#4338ca)}.red{background:linear-gradient(135deg,#be123c,#fb7185)}.gray{background:linear-gradient(135deg,#334155,#64748b)}
+.city-card{min-height:120px;background:linear-gradient(135deg,rgba(56,189,248,.18),rgba(251,191,36,.12));border:1px solid var(--line);border-radius:22px;padding:16px}
+.city-card h3{margin:0 0 8px;font-size:22px}
 h2{font-size:28px;margin:10px 0 14px} h3{font-size:21px;margin:0 0 8px}
 .muted{color:var(--muted)}.story{font-size:24px;font-weight:900;margin:3px 0}.city{font-weight:bold;color:var(--green)}.date{color:var(--muted);font-size:14px}
-.btn{display:inline-block;text-decoration:none;color:#07111f;background:var(--gold);border-radius:14px;padding:11px 14px;font-weight:900;margin:8px 5px 0 0}.btn.bluebtn{background:var(--blue)}.btn.greenbtn{background:var(--green)}
+.btn{display:inline-block;text-decoration:none;color:#07111f;background:var(--gold);border-radius:14px;padding:11px 14px;font-weight:900;margin:8px 5px 0 0}.btn.bluebtn{background:var(--blue)}.btn.greenbtn{background:var(--green)}.btn.light{background:#e2e8f0}
 .toprow{display:flex;justify-content:space-between;align-items:center;gap:10px}.homebtn{border:1px solid var(--line);background:#142541;color:white;border-radius:14px;padding:10px 14px;font-weight:bold}
 .bottom{position:fixed;bottom:0;left:0;right:0;background:rgba(7,17,31,.98);border-top:1px solid var(--line);display:flex;justify-content:space-around;gap:4px;padding:8px 4px;z-index:20}
 .bottom button{background:none;border:0;color:white;text-align:center;font-size:12px;min-width:48px;cursor:pointer}.bottom button.active{color:var(--gold)}.bottom .ico{display:block;font-size:22px}
 table{width:100%;border-collapse:collapse}td,th{padding:12px;border-bottom:1px solid var(--line);text-align:right}.total{font-size:20px;font-weight:900;color:var(--gold)}
 .check label{display:block;padding:12px;border-bottom:1px solid var(--line);font-size:17px}.check input{transform:scale(1.25);margin-left:8px}
 .progress{height:14px;background:rgba(255,255,255,.12);border-radius:999px;overflow:hidden}.bar{height:100%;background:linear-gradient(90deg,var(--green),var(--gold));width:0%}
+.doc-badge{display:inline-block;background:rgba(34,197,94,.13);border:1px solid rgba(34,197,94,.35);color:#bbf7d0;border-radius:999px;padding:4px 10px;font-size:13px}
+.doc-badge.missing{background:rgba(251,191,36,.12);border-color:rgba(251,191,36,.35);color:#fde68a}
+.info-list{display:grid;gap:8px;margin:10px 0}
+.info-list div{background:var(--soft);border-radius:14px;padding:10px}
 </style>
 </head>
 <body>
@@ -42,21 +54,30 @@ table{width:100%;border-collapse:collapse}td,th{padding:12px;border-bottom:1px s
 
 <main class="wrap">
 <section class="screen active" id="home">
-  <div class="card">
+  <div class="card hero-card">
     <div class="date">האירוע הבא</div>
     <div class="story">המפגש</div>
     <p>נחיתה ב־JFK, מעבר לפילדלפיה, ומפגש עם עמרי וגלעד.</p>
     <p><b>04:55</b> נחיתה ב־JFK · <b>ערב</b> Whistlers Inn + Cherry Hill Mall</p>
   </div>
+
+  <div class="city-grid">
+    <div class="city-card"><h3>פילדלפיה</h3><p class="muted">02–05/07 · משחק ראשון</p></div>
+    <div class="city-card"><h3>ניו יורק</h3><p class="muted">05–08/07 · Hampton Inn</p></div>
+    <div class="city-card"><h3>בוסטון</h3><p class="muted">08–10/07 · רבע גמר</p></div>
+    <div class="city-card"><h3>מיאמי</h3><p class="muted">10–12/07 · Henrosa</p></div>
+  </div>
+
   <div class="card">
     <h3>הכנות לטיול</h3>
     <div class="progress"><div class="bar" id="progressBar"></div></div>
     <p class="muted" id="progressText">מתעדכן לפי הצ׳קליסט</p>
   </div>
+
   <div class="grid">
     <button class="tile blue" data-screen="journey"><span>🗓️</span><b>מסע</b><small>כל ימי הטיול</small></button>
     <button class="tile gold" data-screen="matches"><span>⚽</span><b>משחקים</b><small>שמינית ורבעים</small></button>
-    <button class="tile green" data-screen="hotels"><span>🏨</span><b>מלונות</b><small>כתובות וניווט</small></button>
+    <button class="tile green" data-screen="hotels"><span>🏨</span><b>מלונות</b><small>כתובות, ניווט ומסמכים</small></button>
     <button class="tile purple" data-screen="transport"><span>✈️</span><b>תחבורה</b><small>טיסות, Uber, Amtrak</small></button>
     <button class="tile red" data-screen="docs"><span>📂</span><b>מסמכים</b><small>אישורים והזמנות</small></button>
     <button class="tile blue" data-screen="family"><span>👨‍👦‍👦</span><b>משפחה</b><small>ניר, עמרי, גלעד</small></button>
@@ -87,10 +108,23 @@ table{width:100%;border-collapse:collapse}td,th{padding:12px;border-bottom:1px s
 </div></section>
 
 <section class="screen" id="hotels"><div class="toprow"><h2>מלונות</h2><button class="homebtn" data-screen="home">בית</button></div><div class="grid">
-<div class="card"><h3>פילדלפיה</h3><p>Sleep Inn Cinnaminson – Philadelphia East<br>02–05/07 · ₪3,966</p><a class="btn bluebtn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Sleep+Inn+Cinnaminson+Philadelphia+East">נווט</a></div>
-<div class="card"><h3>ניו יורק</h3><p>Hampton Inn Manhattan–35th St Empire State Bldg<br>59 West 35th Street · 05–08/07 · ₪4,074<br><span class="muted">ארוחת בוקר כלולה</span></p><a class="btn bluebtn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Hampton+Inn+Manhattan+35th+St+Empire+State+Bldg">נווט</a></div>
-<div class="card"><h3>בוסטון</h3><p>231 Savin Hill Avenue<br>08–10/07 · ₪1,832</p><a class="btn bluebtn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=231+Savin+Hill+Avenue+Boston">נווט</a></div>
-<div class="card"><h3>מיאמי</h3><p>Henrosa Hotel<br>1435 Collins Ave · 10–12/07 · ₪3,390</p><a class="btn bluebtn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Henrosa+Hotel+1435+Collins+Ave+Miami+Beach">נווט</a></div>
+<div class="card"><h3>פילדלפיה</h3><p>Sleep Inn Cinnaminson – Philadelphia East<br>02–05/07 · ₪3,966</p><span class="doc-badge missing">מסמך חסר</span><br><a class="btn bluebtn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Sleep+Inn+Cinnaminson+Philadelphia+East">נווט</a></div>
+
+<div class="card"><h3>ניו יורק</h3><p>Hampton Inn Manhattan–35th St Empire State Bldg</p>
+<div class="info-list">
+<div>📍 59 West 35th Street</div>
+<div>📅 05–08/07 · 3 לילות</div>
+<div>💵 ₪4,074 · US$1,363.23</div>
+<div>🍳 ארוחת בוקר כלולה</div>
+<div>🔢 אישור: 5056.224.359 · קוד סודי: 5944</div>
+</div>
+<span class="doc-badge">מסמך קיים</span><br>
+<a class="btn bluebtn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Hampton+Inn+Manhattan+35th+St+Empire+State+Bldg">נווט</a>
+<a class="btn" target="_blank" href="documents/hampton-inn-nyc-booking-5056224359.pdf">פתח אישור הזמנה</a>
+</div>
+
+<div class="card"><h3>בוסטון</h3><p>231 Savin Hill Avenue<br>08–10/07 · ₪1,832</p><span class="doc-badge missing">מסמך חסר</span><br><a class="btn bluebtn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=231+Savin+Hill+Avenue+Boston">נווט</a></div>
+<div class="card"><h3>מיאמי</h3><p>Henrosa Hotel<br>1435 Collins Ave · 10–12/07 · ₪3,390</p><span class="doc-badge missing">מסמך חסר</span><br><a class="btn bluebtn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Henrosa+Hotel+1435+Collins+Ave+Miami+Beach">נווט</a></div>
 </div></section>
 
 <section class="screen" id="transport"><div class="toprow"><h2>תחבורה</h2><button class="homebtn" data-screen="home">בית</button></div><div class="grid">
@@ -101,10 +135,10 @@ table{width:100%;border-collapse:collapse}td,th{padding:12px;border-bottom:1px s
 </div></section>
 
 <section class="screen" id="docs"><div class="toprow"><h2>מסמכים</h2><button class="homebtn" data-screen="home">בית</button></div><div class="grid">
-<div class="card"><h3>אישור Hampton Inn ניו יורק</h3><p class="muted">מלון · 05–08/07</p></div>
-<div class="card"><h3>אישור Henrosa מיאמי</h3><p class="muted">מלון · 10–12/07</p></div>
-<div class="card"><h3>Peter Luger</h3><p class="muted">Resy · 06/07 · 20:15</p></div>
-<div class="card"><h3>רכבת לבוסטון</h3><p class="muted">טרם הוזמן</p></div>
+<div class="card"><h3>Hampton Inn ניו יורק</h3><p class="muted">מלון · 05–08/07 · אישור 5056.224.359</p><a class="btn" target="_blank" href="documents/hampton-inn-nyc-booking-5056224359.pdf">פתח PDF</a></div>
+<div class="card"><h3>Henrosa מיאמי</h3><p class="muted">מלון · 10–12/07</p><span class="doc-badge missing">טרם הועלה</span></div>
+<div class="card"><h3>Peter Luger</h3><p class="muted">Resy · 06/07 · 20:15</p><span class="doc-badge missing">טרם הועלה</span></div>
+<div class="card"><h3>רכבת לבוסטון</h3><p class="muted">טרם הוזמן</p><span class="doc-badge missing">פתוח</span></div>
 </div></section>
 
 <section class="screen" id="family"><div class="toprow"><h2>משפחה</h2><button class="homebtn" data-screen="home">בית</button></div><div class="grid">
