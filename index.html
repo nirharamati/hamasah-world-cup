@@ -4,75 +4,91 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>המסע | משפחת הרמתי</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#07111f;--text:#eef6ff;--muted:#a8b7c9;--card:#101d31;--card2:#152642;
-  --gold:#fbbf24;--blue:#38bdf8;--green:#22c55e;--red:#fb7185;--line:rgba(255,255,255,.14);
+  --gold:#fbbf24;--blue:#38bdf8;--green:#22c55e;--red:#fb7185;--purple:#a78bfa;
+  --line:rgba(255,255,255,.14);--soft:rgba(255,255,255,.07);
 }
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(180deg,#06101f,#10233b 46%,#07111f);color:var(--text);padding-bottom:88px}
-header{padding:30px 16px;text-align:center;background:
+body{margin:0;font-family:'Rubik',Arial,sans-serif;background:linear-gradient(180deg,#06101f,#10233b 46%,#07111f);color:var(--text);padding-bottom:88px}
+header{padding:28px 16px 18px;text-align:center;background:
 radial-gradient(circle at 18% 12%,rgba(56,189,248,.38),transparent 30%),
 radial-gradient(circle at 82% 20%,rgba(251,191,36,.28),transparent 30%),
 linear-gradient(135deg,#0b1020,#123b7a,#0f766e)}
-header h1{margin:8px 0;font-size:31px}
+header h1{margin:8px 0;font-size:31px;font-weight:900}
 header p{margin:0;color:#dbeafe}
+.livebar{margin:14px auto 0;max-width:760px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.livebox{background:rgba(0,0,0,.23);border:1px solid rgba(255,255,255,.18);border-radius:18px;padding:10px}
+.livebox b{display:block;color:white;font-size:18px}.livebox span{color:#dbeafe;font-size:12px}
 .version-pill{display:inline-block;margin-top:10px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.24);border-radius:999px;padding:6px 12px;font-size:13px}
 .wrap{max-width:1120px;margin:auto;padding:14px}
 .screen{display:none}.screen.active{display:block}
-.card{background:linear-gradient(180deg,var(--card),#0b1728);border:1px solid var(--line);border-radius:24px;padding:18px;margin:14px 0;box-shadow:0 12px 30px rgba(0,0,0,.25)}
+.card{background:linear-gradient(180deg,var(--card),#0b1728);border:1px solid var(--line);border-radius:26px;padding:18px;margin:14px 0;box-shadow:0 12px 30px rgba(0,0,0,.25)}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
 .city-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-@media(max-width:900px){.city-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:900px){.city-grid{grid-template-columns:repeat(2,1fr)}.livebar{grid-template-columns:1fr}}
 @media(max-width:760px){.grid,.city-grid{grid-template-columns:1fr} header h1{font-size:25px}}
+.tile,.city-card{transition:.15s transform,.15s filter}.tile:active,.city-card:active{transform:scale(.98);filter:brightness(1.12)}
 .tile{border:0;min-height:126px;border-radius:24px;padding:18px;text-align:right;color:white;font-weight:bold;box-shadow:0 14px 30px rgba(0,0,0,.28);cursor:pointer;width:100%}
 .tile span{display:block;font-size:36px;margin-bottom:8px}.tile b{display:block;font-size:24px}.tile small{display:block;color:#eef6ff;margin-top:4px}
 .blue{background:linear-gradient(135deg,#0284c7,#1d4ed8)}.gold{background:linear-gradient(135deg,#ca8a04,#f97316)}.green{background:linear-gradient(135deg,#0f766e,#16a34a)}.purple{background:linear-gradient(135deg,#7c3aed,#4338ca)}.red{background:linear-gradient(135deg,#be123c,#fb7185)}.gray{background:linear-gradient(135deg,#334155,#64748b)}
-.city-card{min-height:130px;background:linear-gradient(135deg,rgba(56,189,248,.18),rgba(251,191,36,.12));border:1px solid var(--line);border-radius:22px;padding:16px}
-.city-card h3{margin:0 0 8px;font-size:22px}.city-card p{margin:5px 0}
-h2{font-size:28px;margin:10px 0 14px} h3{font-size:21px;margin:0 0 8px}
+.city-card{cursor:pointer;min-height:130px;background:linear-gradient(135deg,rgba(56,189,248,.2),rgba(251,191,36,.12));border:1px solid var(--line);border-radius:24px;padding:16px;box-shadow:0 10px 24px rgba(0,0,0,.22)}
+.city-card h3{margin:0 0 8px;font-size:22px}.city-card p{margin:5px 0}.city-card .arrow{color:var(--gold);font-weight:900}
+h2{font-size:28px;margin:10px 0 14px;font-weight:900} h3{font-size:21px;margin:0 0 8px;font-weight:800}
 .muted{color:var(--muted)}.story{font-size:24px;font-weight:900;margin:3px 0}.city{font-weight:bold;color:var(--green)}.date{color:var(--muted);font-size:14px}
-.btn{display:inline-block;text-decoration:none;color:#07111f;background:var(--gold);border-radius:14px;padding:11px 14px;font-weight:900;margin:8px 5px 0 0}.btn.bluebtn{background:var(--blue)}.btn.greenbtn{background:var(--green)}.btn.light{background:#e2e8f0}
+.btn{display:inline-block;text-decoration:none;color:#07111f;background:var(--gold);border-radius:15px;padding:12px 15px;font-weight:900;margin:8px 5px 0 0}.btn.bluebtn{background:var(--blue)}.btn.greenbtn{background:var(--green)}.btn.light{background:#e2e8f0}
 .toprow{display:flex;justify-content:space-between;align-items:center;gap:10px}.homebtn{border:0;background:linear-gradient(135deg,#38bdf8,#1d4ed8);color:#06101f;border-radius:18px;padding:13px 18px;font-weight:900;font-size:16px;box-shadow:0 10px 22px rgba(56,189,248,.25)}
 .bottom{position:fixed;bottom:0;left:0;right:0;background:rgba(7,17,31,.98);border-top:1px solid var(--line);display:flex;justify-content:space-around;gap:4px;padding:8px 4px;z-index:20}
-.bottom button{background:none;border:0;color:white;text-align:center;font-size:12px;min-width:48px;cursor:pointer}.bottom button.active{color:var(--gold);font-weight:bold}.bottom .ico{display:block;font-size:22px}
+.bottom button{background:none;border:0;color:white;text-align:center;font-size:12px;min-width:48px;cursor:pointer;font-family:inherit}.bottom button.active{color:var(--gold);font-weight:bold}.bottom .ico{display:block;font-size:22px}
 .bottom button[data-screen="home"]{background:linear-gradient(135deg,#38bdf8,#1d4ed8);color:#06101f;border-radius:16px;padding:5px 9px;font-weight:900}
 table{width:100%;border-collapse:collapse}td,th{padding:12px;border-bottom:1px solid var(--line);text-align:right}.total{font-size:20px;font-weight:900;color:var(--gold)}
 .check label{display:block;padding:12px;border-bottom:1px solid var(--line);font-size:17px}.check input{transform:scale(1.25);margin-left:8px}
 .progress{height:14px;background:rgba(255,255,255,.12);border-radius:999px;overflow:hidden}.bar{height:100%;background:linear-gradient(90deg,var(--green),var(--gold));width:0%}
 .doc-badge{display:inline-block;background:rgba(34,197,94,.13);border:1px solid rgba(34,197,94,.35);color:#bbf7d0;border-radius:999px;padding:4px 10px;font-size:13px}
 .doc-badge.missing{background:rgba(251,191,36,.12);border-color:rgba(251,191,36,.35);color:#fde68a}
-.info-list{display:grid;gap:8px;margin:10px 0}.info-list div{background:rgba(255,255,255,.07);border-radius:14px;padding:10px}
+.info-list{display:grid;gap:8px;margin:10px 0}.info-list div{background:var(--soft);border-radius:14px;padding:10px}
 .next-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}@media(max-width:800px){.next-grid{grid-template-columns:1fr}}
-.next-card{background:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:20px;padding:14px}
+.next-card{background:var(--soft);border:1px solid var(--line);border-radius:20px;padding:14px}
 .footer-version{text-align:center;color:var(--muted);font-size:13px;margin:24px 0 10px}
+.match-card{background:linear-gradient(180deg,#10203a,#0b1728);border-right:7px solid var(--gold)}
+.vs-placeholder{font-size:19px;font-weight:900;color:#fde68a;margin:10px 0}
+.city-detail-header{background:linear-gradient(135deg,rgba(56,189,248,.18),rgba(251,191,36,.12));border:1px solid var(--line);border-radius:24px;padding:18px;margin:14px 0}
 </style>
 </head>
 <body>
 <header>
   <div style="letter-spacing:.16em;font-size:12px;color:#dbeafe">HARAMATI WORLD CUP TOUR</div>
-  <h1>מסע מונדיאל 2026</h1>
+  <h1>המסע של משפחת הרמתי למונדיאל 2026</h1>
   <p>ניר • עמרי • גלעד · 2–12 ביולי 2026</p>
-  <span class="version-pill">Version 3.0</span>
+  <div class="livebar">
+    <div class="livebox"><b id="israelClock">--:--</b><span>🇮🇱 ישראל</span></div>
+    <div class="livebox"><b id="usaClock">--:--</b><span>🇺🇸 החוף המזרחי</span></div>
+    <div class="livebox"><b id="countdown">--</b><span>⏳ להמראה</span></div>
+  </div>
+  <span class="version-pill">Version 4.0</span>
 </header>
 
 <main class="wrap">
 <section class="screen active" id="home">
   <div class="card">
-    <div class="date">דאשבורד</div>
-    <div class="story">הספירה לאחור החלה</div>
+    <div class="date">היום במסע</div>
+    <div class="story">שלב ההכנות</div>
     <div class="next-grid">
-      <div class="next-card"><b>✈️ הטיסה הבאה</b><p>LY003 · תל אביב → JFK<br>02/07 · 00:05</p></div>
-      <div class="next-card"><b>⚽ המשחק הבא</b><p>שמינית גמר<br>04/07 · 17:00 · פילדלפיה</p></div>
-      <div class="next-card"><b>🏨 המלון הבא</b><p>Sleep Inn Cinnaminson<br>02–05/07</p></div>
+      <div class="next-card"><b>✈️ הטיסה הבאה</b><p>LY003 · תל אביב → JFK<br>2/7 · 00:05</p></div>
+      <div class="next-card"><b>⚽ המשחק הבא</b><p>משחק שמינית הגמר<br>4/7 · 17:00 · פילדלפיה</p></div>
+      <div class="next-card"><b>🏨 המלון הבא</b><p>Sleep Inn Cinnaminson<br>2–5/7</p></div>
     </div>
   </div>
 
   <div class="city-grid">
-    <div class="city-card"><h3>פילדלפיה</h3><p>02–05/07</p><p>🏨 Sleep Inn Cinnaminson</p></div>
-    <div class="city-card"><h3>ניו יורק</h3><p>05–08/07</p><p>🏨 Hampton Inn 35th St</p></div>
-    <div class="city-card"><h3>בוסטון</h3><p>08–10/07</p><p>🏨 231 Savin Hill Avenue</p></div>
-    <div class="city-card"><h3>מיאמי</h3><p>10–12/07</p><p>🏨 Henrosa Hotel</p></div>
+    <div class="city-card" data-screen="city-philly"><h3>פילדלפיה</h3><p>2–5/7</p><p>🏨 Sleep Inn Cinnaminson</p><p class="arrow">פתח עיר ←</p></div>
+    <div class="city-card" data-screen="city-nyc"><h3>ניו יורק</h3><p>5–8/7</p><p>🏨 Hampton Inn 35th St</p><p class="arrow">פתח עיר ←</p></div>
+    <div class="city-card" data-screen="city-boston"><h3>בוסטון</h3><p>8–10/7</p><p>🏨 231 Savin Hill Avenue</p><p class="arrow">פתח עיר ←</p></div>
+    <div class="city-card" data-screen="city-miami"><h3>מיאמי</h3><p>10–12/7</p><p>🏨 Henrosa Hotel</p><p class="arrow">פתח עיר ←</p></div>
   </div>
 
   <div class="card">
@@ -82,109 +98,81 @@ table{width:100%;border-collapse:collapse}td,th{padding:12px;border-bottom:1px s
   </div>
 
   <div class="grid">
-    <button class="tile blue" data-screen="journey"><span>🗓️</span><b>מסע</b><small>כל ימי הטיול</small></button>
+    <button class="tile blue" data-screen="journey"><span>🗓️</span><b>תוכנית המסע</b><small>כל ימי הטיול</small></button>
     <button class="tile gold" data-screen="matches"><span>⚽</span><b>משחקים</b><small>שמינית ורבעים</small></button>
     <button class="tile green" data-screen="hotels"><span>🏨</span><b>מלונות</b><small>כתובות, ניווט ומסמכים</small></button>
     <button class="tile purple" data-screen="transport"><span>✈️</span><b>תחבורה</b><small>טיסות, Uber, Amtrak</small></button>
     <button class="tile red" data-screen="docs"><span>📂</span><b>מסמכים</b><small>אישורים והזמנות</small></button>
-    <button class="tile blue" data-screen="family"><span>👨‍👦‍👦</span><b>משפחה</b><small>ניר, עמרי, גלעד</small></button>
+    <button class="tile blue" data-screen="travelers"><span>👨‍👦‍👦</span><b>נוסעים</b><small>ניר, עמרי, גלעד</small></button>
     <button class="tile gray" data-screen="budget"><span>💰</span><b>תקציב</b><small>כולל סה״כ</small></button>
     <button class="tile green" data-screen="checklist"><span>✅</span><b>צ׳קליסט</b><small>סימון נשמר</small></button>
   </div>
 </section>
 
-<section class="screen" id="journey"><div class="toprow"><h2>מסע</h2><button class="homebtn" data-screen="home">🏠 בית</button></div><div class="grid">
-<div class="card"><div class="date">02/07</div><div class="story">המפגש</div><div class="city">פילדלפיה</div><p>נחיתה, מעבר למלון, ערב רגוע.</p></div>
-<div class="card"><div class="date">03/07</div><div class="story">יום טיול עם פיל דל ופיה</div><div class="city">פילדלפיה</div><p>Independence Hall, Liberty Bell, Reading Terminal Market, מדרגות רוקי.</p></div>
-<div class="card"><div class="date">04/07</div><div class="story">שמינית ועצמאות!</div><div class="city">פילדלפיה</div><p>שמינית גמר · Lincoln Financial Field · 17:00</p></div>
-<div class="card"><div class="date">05/07</div><div class="story">שמינית בתפוח הגדול!</div><div class="city">ניו יורק</div><p>מונית בבוקר לניו יורק, משחק ב־MetLife · 16:00.</p></div>
-<div class="card"><div class="date">06/07</div><div class="story">מחכים לפיטר לוגר...</div><div class="city">ניו יורק</div><p>Lower Manhattan, DUMBO, Peter Luger · 20:15.</p></div>
-<div class="card"><div class="date">07/07</div><div class="story">גם בניו יורק יש אופניים...</div><div class="city">מנהטן</div><p>08:45–10:45 רכיבה בסנטרל פארק.</p></div>
-<div class="card"><div class="date">08/07</div><div class="story">טרם נקבע</div><div class="city">בוסטון</div><p>Amtrak מניו יורק לבוסטון – טרם הוזמן.</p></div>
-<div class="card"><div class="date">09/07</div><div class="story">רבע במסצ'וסטס!</div><div class="city">בוסטון</div><p>רבע גמר · Gillette Stadium · 16:00</p></div>
-<div class="card"><div class="date">10/07</div><div class="story">טיסת פנים לפנים</div><div class="city">מיאמי</div><p>בוסטון → מיאמי · 06:00 · Henrosa Hotel.</p></div>
-<div class="card"><div class="date">11/07</div><div class="story">רבע במיאמי ביץ!</div><div class="city">מיאמי</div><p>רבע גמר · Hard Rock Stadium · 17:00</p></div>
-<div class="card"><div class="date">12/07</div><div class="story">טרם נקבע</div><div class="city">פיצול חזרה</div><p>ניר לישראל, עמרי לברלין, גלעד נשאר בארה״ב.</p></div>
+<section class="screen" id="journey"><div class="toprow"><h2>תוכנית המסע</h2><button class="homebtn" data-screen="home">🏠 בית</button></div><div class="grid">
+<div class="card"><div class="date">2/7</div><div class="story">המפגש</div><div class="city">פילדלפיה</div><p>נחיתה, מעבר למלון, ערב רגוע.</p></div>
+<div class="card"><div class="date">3/7</div><div class="story">יום טיול עם פיל דל ופיה</div><div class="city">פילדלפיה</div><p>Independence Hall, Liberty Bell, Reading Terminal Market, מדרגות רוקי.</p></div>
+<div class="card"><div class="date">4/7</div><div class="story">שמינית ועצמאות!</div><div class="city">פילדלפיה</div><p>שמינית גמר · Lincoln Financial Field · 17:00</p></div>
+<div class="card"><div class="date">5/7</div><div class="story">שמינית בתפוח הגדול!</div><div class="city">ניו יורק</div><p>מונית בבוקר לניו יורק, משחק ב־MetLife · 16:00.</p></div>
+<div class="card"><div class="date">6/7</div><div class="story">מחכים לפיטר לוגר...</div><div class="city">ניו יורק</div><p>Lower Manhattan, DUMBO, Peter Luger · 20:15.</p></div>
+<div class="card"><div class="date">7/7</div><div class="story">גם בניו יורק יש אופניים...</div><div class="city">מנהטן</div><p>08:45–10:45 רכיבה בסנטרל פארק.</p></div>
+<div class="card"><div class="date">8/7</div><div class="story">טרם נקבע</div><div class="city">בוסטון</div><p>Amtrak מניו יורק לבוסטון – טרם הוזמן.</p></div>
+<div class="card"><div class="date">9/7</div><div class="story">רבע במסצ'וסטס!</div><div class="city">בוסטון</div><p>רבע גמר · Gillette Stadium · 16:00</p></div>
+<div class="card"><div class="date">10/7</div><div class="story">טיסת פנים לפנים</div><div class="city">מיאמי</div><p>בוסטון → מיאמי · 06:00 · Henrosa Hotel.</p></div>
+<div class="card"><div class="date">11/7</div><div class="story">רבע במיאמי ביץ!</div><div class="city">מיאמי</div><p>רבע גמר · Hard Rock Stadium · 17:00</p></div>
+<div class="card"><div class="date">12/7</div><div class="story">טרם נקבע</div><div class="city">פיצול חזרה</div><p>ניר לישראל, עמרי לברלין, גלעד נשאר בארה״ב.</p></div>
 </div></section>
 
 <section class="screen" id="matches"><div class="toprow"><h2>משחקים</h2><button class="homebtn" data-screen="home">🏠 בית</button></div><div class="grid">
-<div class="card"><h3>שמינית גמר</h3><p>04/07 · 17:00 · Lincoln Financial Field</p><p class="muted">נבחרות יתווספו כשיתפרסמו</p><a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Lincoln+Financial+Field">נווט</a></div>
-<div class="card"><h3>שמינית גמר</h3><p>05/07 · 16:00 · MetLife Stadium</p><p class="muted">נבחרות יתווספו כשיתפרסמו</p><a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=MetLife+Stadium">נווט</a></div>
-<div class="card"><h3>רבע גמר</h3><p>09/07 · 16:00 · Gillette Stadium</p><p class="muted">נבחרות יתווספו כשיתפרסמו</p><a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Gillette+Stadium">נווט</a></div>
-<div class="card"><h3>רבע גמר</h3><p>11/07 · 17:00 · Hard Rock Stadium</p><p class="muted">נבחרות יתווספו כשיתפרסמו</p><a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Hard+Rock+Stadium+Miami">נווט</a></div>
+<div class="card match-card"><h3>משחק שמינית הגמר</h3><div class="vs-placeholder">המשחק ייקבע לאחר סיום שלב הבתים</div><p>4/7 · 17:00 · Lincoln Financial Field</p><a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Lincoln+Financial+Field">נווט</a></div>
+<div class="card match-card"><h3>משחק שמינית הגמר</h3><div class="vs-placeholder">המשחק ייקבע לאחר סיום שלב הבתים</div><p>5/7 · 16:00 · MetLife Stadium</p><a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=MetLife+Stadium">נווט</a></div>
+<div class="card match-card"><h3>משחק רבע הגמר</h3><div class="vs-placeholder">המשחק ייקבע לאחר משחקי שמינית הגמר</div><p>9/7 · 16:00 · Gillette Stadium</p><a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Gillette+Stadium">נווט</a></div>
+<div class="card match-card"><h3>משחק רבע הגמר</h3><div class="vs-placeholder">המשחק ייקבע לאחר משחקי שמינית הגמר</div><p>11/7 · 17:00 · Hard Rock Stadium</p><a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Hard+Rock+Stadium+Miami">נווט</a></div>
 </div></section>
 
 <section class="screen" id="hotels"><div class="toprow"><h2>מלונות</h2><button class="homebtn" data-screen="home">🏠 בית</button></div><div class="grid">
 <div class="card"><h3>פילדלפיה</h3><p>Sleep Inn Cinnaminson – Philadelphia East</p>
-<div class="info-list">
-<div>📍 208 US 130 North, Cinnaminson, NJ 08077</div>
-<div>📅 02–05/07 · 3 לילות</div>
-<div>💵 3,706 ש״ח · 1,322.03 $</div>
-<div>🍳 ארוחת בוקר כלולה</div>
-<div>🔢 אישור: 6043.681.554 · קוד סודי: 8933</div>
-</div>
-<span class="doc-badge">מסמך קיים</span><br>
-<a class="btn bluebtn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Sleep+Inn+Cinnaminson+Philadelphia+East">נווט</a>
-<a class="btn" target="_blank" href="documents/sleep-inn-philadelphia-booking-6043681554.pdf">פתח אישור הזמנה</a>
-</div>
+<div class="info-list"><div>📍 208 US 130 North, Cinnaminson, NJ 08077</div><div>📅 2–5/7 · 3 לילות</div><div>💵 3,706 ש״ח · 1,322.03 $</div><div>🍳 ארוחת בוקר כלולה</div><div>🔢 אישור: 6043.681.554 · קוד סודי: 8933</div></div>
+<span class="doc-badge">מסמך קיים</span><br><a class="btn bluebtn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Sleep+Inn+Cinnaminson+Philadelphia+East">נווט</a><a class="btn" target="_blank" href="documents/sleep-inn-philadelphia-booking-6043681554.pdf">פתח אישור הזמנה</a></div>
 
 <div class="card"><h3>ניו יורק</h3><p>Hampton Inn Manhattan–35th St Empire State Bldg</p>
-<div class="info-list">
-<div>📍 59 West 35th Street</div>
-<div>📅 05–08/07 · 3 לילות</div>
-<div>💵 4,074 ש״ח · 1,363.23 $</div>
-<div>🍳 ארוחת בוקר כלולה</div>
-<div>🔢 אישור: 5056.224.359 · קוד סודי: 5944</div>
-</div>
-<span class="doc-badge">מסמך קיים</span><br>
-<a class="btn bluebtn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Hampton+Inn+Manhattan+35th+St+Empire+State+Bldg">נווט</a>
-<a class="btn" target="_blank" href="documents/hampton-inn-nyc-booking-5056224359.pdf">פתח אישור הזמנה</a>
-</div>
+<div class="info-list"><div>📍 59 West 35th Street</div><div>📅 5–8/7 · 3 לילות</div><div>💵 4,074 ש״ח · 1,363.23 $</div><div>🍳 ארוחת בוקר כלולה</div><div>🔢 אישור: 5056.224.359 · קוד סודי: 5944</div></div>
+<span class="doc-badge">מסמך קיים</span><br><a class="btn bluebtn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Hampton+Inn+Manhattan+35th+St+Empire+State+Bldg">נווט</a><a class="btn" target="_blank" href="documents/hampton-inn-nyc-booking-5056224359.pdf">פתח אישור הזמנה</a></div>
 
-<div class="card"><h3>בוסטון</h3><p>231 Savin Hill Avenue<br>08–10/07 · 1,832 ש״ח</p><span class="doc-badge missing">מסמך חסר</span><br><a class="btn bluebtn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=231+Savin+Hill+Avenue+Boston">נווט</a></div>
+<div class="card"><h3>בוסטון</h3><p>231 Savin Hill Avenue<br>8–10/7 · 1,832 ש״ח</p><span class="doc-badge missing">מסמך חסר</span><br><a class="btn bluebtn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=231+Savin+Hill+Avenue+Boston">נווט</a></div>
 
 <div class="card"><h3>מיאמי</h3><p>Henrosa Hotel</p>
-<div class="info-list">
-<div>📍 1435 Collins Ave, Miami Beach</div>
-<div>📅 10–12/07 · 2 לילות</div>
-<div>💵 3,459 ש״ח · 1,157.51 $</div>
-<div>🍳 ללא ארוחות</div>
-<div>🔢 אישור: 5310.569.858 · קוד סודי: 1276</div>
-<div>💳 פיקדון נזקים: 200 $</div>
-</div>
-<span class="doc-badge">מסמך קיים</span><br>
-<a class="btn bluebtn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Henrosa+Hotel+1435+Collins+Ave+Miami+Beach">נווט</a>
-<a class="btn" target="_blank" href="documents/henrosa-miami-booking-5310569858.pdf">פתח אישור הזמנה</a>
-</div>
+<div class="info-list"><div>📍 1435 Collins Ave, Miami Beach</div><div>📅 10–12/7 · 2 לילות</div><div>💵 3,459 ש״ח · 1,157.51 $</div><div>🍳 ללא ארוחות</div><div>🔢 אישור: 5310.569.858 · קוד סודי: 1276</div><div>💳 פיקדון נזקים: 200 $</div></div>
+<span class="doc-badge">מסמך קיים</span><br><a class="btn bluebtn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Henrosa+Hotel+1435+Collins+Ave+Miami+Beach">נווט</a><a class="btn" target="_blank" href="documents/henrosa-miami-booking-5310569858.pdf">פתח אישור הזמנה</a></div>
 </div></section>
 
 <section class="screen" id="transport"><div class="toprow"><h2>תחבורה</h2><button class="homebtn" data-screen="home">🏠 בית</button></div><div class="grid">
-<div class="card"><h3>05/07 · פילדלפיה → ניו יורק</h3><p>המלצה: Uber / Uber Reserve בבוקר.</p><a class="btn greenbtn" target="_blank" href="https://www.uber.com/">פתח Uber</a></div>
-<div class="card"><h3>08/07 · ניו יורק → בוסטון</h3><p>Amtrak מ־Penn Station ל־Boston South Station. טרם הוזמן.</p><a class="btn greenbtn" target="_blank" href="https://www.amtrak.com/">פתח Amtrak</a></div>
-<div class="card"><h3>10/07 · בוסטון → מיאמי</h3><p>American Airlines · 06:00 · הזמנה 5K3R1J6</p></div>
-<div class="card"><h3>11/07 · מיאמי → Hard Rock</h3><p>Uber/Lyft, לצאת מוקדם עקב עומסים.</p></div>
+<div class="card"><h3>5/7 · פילדלפיה → ניו יורק</h3><p>המלצה: Uber / Uber Reserve בבוקר.</p><a class="btn greenbtn" target="_blank" href="https://www.uber.com/">פתח Uber</a></div>
+<div class="card"><h3>8/7 · ניו יורק → בוסטון</h3><p>Amtrak מ־Penn Station ל־Boston South Station. טרם הוזמן.</p><a class="btn greenbtn" target="_blank" href="https://www.amtrak.com/">פתח Amtrak</a></div>
+<div class="card"><h3>10/7 · בוסטון → מיאמי</h3><p>American Airlines · 06:00 · הזמנה 5K3R1J6</p></div>
+<div class="card"><h3>11/7 · מיאמי → Hard Rock</h3><p>Uber/Lyft, לצאת מוקדם עקב עומסים.</p></div>
 </div></section>
 
 <section class="screen" id="docs"><div class="toprow"><h2>מסמכים</h2><button class="homebtn" data-screen="home">🏠 בית</button></div>
-<h3>🏨 מלונות</h3>
-<div class="grid">
-<div class="card"><h3>Sleep Inn פילדלפיה</h3><p class="muted">מלון · 02–05/07 · אישור 6043.681.554</p><a class="btn" target="_blank" href="documents/sleep-inn-philadelphia-booking-6043681554.pdf">פתח PDF</a></div>
-<div class="card"><h3>Hampton Inn ניו יורק</h3><p class="muted">מלון · 05–08/07 · אישור 5056.224.359</p><a class="btn" target="_blank" href="documents/hampton-inn-nyc-booking-5056224359.pdf">פתח PDF</a></div>
-<div class="card"><h3>Henrosa מיאמי</h3><p class="muted">מלון · 10–12/07 · אישור 5310.569.858</p><a class="btn" target="_blank" href="documents/henrosa-miami-booking-5310569858.pdf">פתח PDF</a></div>
-<div class="card"><h3>בוסטון</h3><p class="muted">טרם הועלה מסמך</p><span class="doc-badge missing">חסר</span></div>
-</div>
 <h3>🛂 ESTA</h3>
 <div class="grid">
 <div class="card"><h3>ניר</h3><span class="doc-badge missing">טרם הועלה</span></div>
-<div class="card"><h3>עמרי</h3><span class="doc-badge missing">ממתין לקובץ</span></div>
+<div class="card"><h3>עמרי</h3><p class="muted">ESTA מאושרת · בתוקף עד 17/05/2028</p><span class="doc-badge">מסמך קיים</span><br><a class="btn" target="_blank" href="documents/esta-omri-haramati.pdf">פתח ESTA</a></div>
 <div class="card"><h3>גלעד</h3><span class="doc-badge missing">טרם הועלה</span></div>
+</div>
+<h3>🏨 מלונות</h3>
+<div class="grid">
+<div class="card"><h3>Sleep Inn פילדלפיה</h3><p class="muted">מלון · 2–5/7 · אישור 6043.681.554</p><a class="btn" target="_blank" href="documents/sleep-inn-philadelphia-booking-6043681554.pdf">פתח PDF</a></div>
+<div class="card"><h3>Hampton Inn ניו יורק</h3><p class="muted">מלון · 5–8/7 · אישור 5056.224.359</p><a class="btn" target="_blank" href="documents/hampton-inn-nyc-booking-5056224359.pdf">פתח PDF</a></div>
+<div class="card"><h3>Henrosa מיאמי</h3><p class="muted">מלון · 10–12/7 · אישור 5310.569.858</p><a class="btn" target="_blank" href="documents/henrosa-miami-booking-5310569858.pdf">פתח PDF</a></div>
+<div class="card"><h3>בוסטון</h3><p class="muted">טרם הועלה מסמך</p><span class="doc-badge missing">חסר</span></div>
 </div>
 </section>
 
-<section class="screen" id="family"><div class="toprow"><h2>משפחה</h2><button class="homebtn" data-screen="home">🏠 בית</button></div><div class="grid">
-<div class="card"><h3>ניר</h3><p>ישראל → JFK · מיאמי → תל אביב</p></div>
-<div class="card"><h3>עמרי</h3><p>דבלין → פילדלפיה · מיאמי → ברלין</p><p class="muted">916 $ הלוך, 954 $ חזור</p></div>
-<div class="card"><h3>גלעד</h3><p>מקוסטה ריקה · נשאר בארה״ב</p></div>
+<section class="screen" id="travelers"><div class="toprow"><h2>נוסעים</h2><button class="homebtn" data-screen="home">🏠 בית</button></div><div class="grid">
+<div class="card"><h3>ניר</h3><p>✈️ TLV → JFK · ✈️ מיאמי → תל אביב</p><p class="muted">ESTA: ממתין למסמך</p></div>
+<div class="card"><h3>עמרי</h3><p>✈️ דבלין → פילדלפיה · ✈️ מיאמי → ברלין</p><p class="muted">ESTA מאושרת עד 17/05/2028</p><a class="btn" target="_blank" href="documents/esta-omri-haramati.pdf">פתח ESTA</a></div>
+<div class="card"><h3>גלעד</h3><p>מקוסטה ריקה · נשאר בארה״ב</p><p class="muted">ESTA: ממתין למסמך</p></div>
 </div></section>
 
 <section class="screen" id="budget"><div class="toprow"><h2>תקציב</h2><button class="homebtn" data-screen="home">🏠 בית</button></div><div class="card"><table>
@@ -202,18 +190,39 @@ table{width:100%;border-collapse:collapse}td,th{padding:12px;border-bottom:1px s
 <label><input type="checkbox" data-item="resy"> אישור Peter Luger ב־Resy</label>
 <label><input type="checkbox" data-item="apps"> אפליקציות Uber / Lyft / Amtrak</label>
 <label><input type="checkbox" data-item="amtrak"> להזמין רכבת ניו יורק → בוסטון</label>
-<label><input type="checkbox" data-item="uber"> לבדוק Uber Reserve ל־05/07</label>
+<label><input type="checkbox" data-item="uber"> לבדוק Uber Reserve ל־5/7</label>
 </div></section>
-<div class="footer-version">Version 3.0 · עודכן לקראת יולי 2026</div>
+
+<section class="screen" id="city-philly"><div class="toprow"><h2>פילדלפיה</h2><button class="homebtn" data-screen="home">🏠 בית</button></div>
+<div class="city-detail-header"><h3>2–5/7 · Sleep Inn Cinnaminson</h3><p>העיר הראשונה במסע ומשחק שמינית הגמר הראשון.</p></div>
+<div class="grid"><div class="card"><h3>🏨 מלון</h3><p>Sleep Inn Cinnaminson – Philadelphia East</p><a class="btn" target="_blank" href="documents/sleep-inn-philadelphia-booking-6043681554.pdf">אישור הזמנה</a></div><div class="card"><h3>⚽ משחק</h3><p>4/7 · 17:00 · Lincoln Financial Field</p></div><div class="card"><h3>🍽️ ערב 2/7</h3><p>Whistlers Inn + Cherry Hill Mall</p></div><div class="card"><h3>📍 טיול 3/7</h3><p>Independence Hall, Liberty Bell, Reading Terminal Market, מדרגות רוקי.</p></div></div>
+</section>
+
+<section class="screen" id="city-nyc"><div class="toprow"><h2>ניו יורק</h2><button class="homebtn" data-screen="home">🏠 בית</button></div>
+<div class="city-detail-header"><h3>5–8/7 · Hampton Inn</h3><p>שמינית בתפוח הגדול, Peter Luger ורכיבה בסנטרל פארק.</p></div>
+<div class="grid"><div class="card"><h3>🏨 מלון</h3><p>Hampton Inn Manhattan–35th St Empire State Bldg</p><a class="btn" target="_blank" href="documents/hampton-inn-nyc-booking-5056224359.pdf">אישור הזמנה</a></div><div class="card"><h3>⚽ משחק</h3><p>5/7 · 16:00 · MetLife Stadium</p></div><div class="card"><h3>🥩 Peter Luger</h3><p>6/7 · 20:15 · הזמנה ל־3</p></div><div class="card"><h3>🚲 סנטרל פארק</h3><p>7/7 · 08:45–10:45</p></div></div>
+</section>
+
+<section class="screen" id="city-boston"><div class="toprow"><h2>בוסטון</h2><button class="homebtn" data-screen="home">🏠 בית</button></div>
+<div class="city-detail-header"><h3>8–10/7 · 231 Savin Hill Avenue</h3><p>מעבר ברכבת מניו יורק ורבע הגמר במסצ׳וסטס.</p></div>
+<div class="grid"><div class="card"><h3>🏨 לינה</h3><p>231 Savin Hill Avenue</p></div><div class="card"><h3>⚽ משחק</h3><p>9/7 · 16:00 · Gillette Stadium</p></div><div class="card"><h3>🚆 רכבת</h3><p>Amtrak מניו יורק לבוסטון · טרם הוזמן</p></div></div>
+</section>
+
+<section class="screen" id="city-miami"><div class="toprow"><h2>מיאמי</h2><button class="homebtn" data-screen="home">🏠 בית</button></div>
+<div class="city-detail-header"><h3>10–12/7 · Henrosa Hotel</h3><p>רבע במיאמי ביץ׳ וסיום המסע.</p></div>
+<div class="grid"><div class="card"><h3>🏨 מלון</h3><p>Henrosa Hotel · 1435 Collins Ave</p><a class="btn" target="_blank" href="documents/henrosa-miami-booking-5310569858.pdf">אישור הזמנה</a></div><div class="card"><h3>⚽ משחק</h3><p>11/7 · 17:00 · Hard Rock Stadium</p></div><div class="card"><h3>✈️ חזרה</h3><p>12/7 · LY018 · מיאמי → תל אביב</p></div></div>
+</section>
+
+<div class="footer-version">Version 4.0 · עודכן לקראת יולי 2026</div>
 </main>
 
 <nav class="bottom">
 <button class="navbtn active" data-screen="home"><span class="ico">🏠</span>בית</button>
-<button class="navbtn" data-screen="journey"><span class="ico">🗓️</span>מסע</button>
+<button class="navbtn" data-screen="journey"><span class="ico">🗓️</span>תוכנית</button>
 <button class="navbtn" data-screen="matches"><span class="ico">⚽</span>משחקים</button>
 <button class="navbtn" data-screen="hotels"><span class="ico">🏨</span>מלונות</button>
 <button class="navbtn" data-screen="docs"><span class="ico">📂</span>מסמכים</button>
-<button class="navbtn" data-screen="family"><span class="ico">👨‍👦‍👦</span>משפחה</button>
+<button class="navbtn" data-screen="travelers"><span class="ico">👨‍👦‍👦</span>נוסעים</button>
 </nav>
 
 <script>
@@ -241,6 +250,21 @@ document.querySelectorAll('#checklistBox input').forEach(box=>{
     updateProgress();
   });
 });
+function tick(){
+  const now=new Date();
+  const israel=new Intl.DateTimeFormat('he-IL',{timeZone:'Asia/Jerusalem',hour:'2-digit',minute:'2-digit',hour12:false}).format(now);
+  const usa=new Intl.DateTimeFormat('he-IL',{timeZone:'America/New_York',hour:'2-digit',minute:'2-digit',hour12:false}).format(now);
+  document.getElementById('israelClock').textContent=israel;
+  document.getElementById('usaClock').textContent=usa;
+  const target=new Date('2026-07-02T00:05:00+03:00');
+  let diff=Math.max(0,target-now);
+  if(diff===0){document.getElementById('countdown').textContent='היום טסים!'; return;}
+  const d=Math.floor(diff/86400000); diff-=d*86400000;
+  const h=Math.floor(diff/3600000); diff-=h*3600000;
+  const m=Math.floor(diff/60000);
+  document.getElementById('countdown').textContent=`${d} ימים · ${h} שעות · ${m} דק׳`;
+}
+tick(); setInterval(tick,1000);
 updateProgress();
 </script>
 </body>
