@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>המסע | משפחת הרמתי</title>
+<style>
+:root{
+  --bg:#07111f;--text:#eef6ff;--muted:#a8b7c9;--card:#101d31;--gold:#fbbf24;
+  --blue:#38bdf8;--green:#22c55e;--line:rgba(255,255,255,.14);
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(180deg,#06101f,#10233b 45%,#07111f);color:var(--text);padding-bottom:82px}
+header{padding:26px 16px;text-align:center;background:linear-gradient(135deg,#0b1020,#123b7a,#0f766e)}
+header h1{margin:8px 0;font-size:29px}
+header p{margin:0;color:#dbeafe}
+.wrap{max-width:1050px;margin:auto;padding:14px}
+.screen{display:none}.screen.active{display:block}
+.card{background:linear-gradient(180deg,var(--card),#0b1728);border:1px solid var(--line);border-radius:22px;padding:18px;margin:14px 0;box-shadow:0 12px 30px rgba(0,0,0,.25)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+@media(max-width:760px){.grid{grid-template-columns:1fr} header h1{font-size:24px}}
+.tile{border:0;min-height:126px;border-radius:24px;padding:18px;text-align:right;color:white;font-weight:bold;box-shadow:0 14px 30px rgba(0,0,0,.28);cursor:pointer;width:100%}
+.tile span{display:block;font-size:36px;margin-bottom:8px}.tile b{display:block;font-size:24px}.tile small{display:block;color:#eef6ff;margin-top:4px}
+.blue{background:linear-gradient(135deg,#0284c7,#1d4ed8)}.gold{background:linear-gradient(135deg,#ca8a04,#f97316)}.green{background:linear-gradient(135deg,#0f766e,#16a34a)}.purple{background:linear-gradient(135deg,#7c3aed,#4338ca)}.red{background:linear-gradient(135deg,#be123c,#fb7185)}.gray{background:linear-gradient(135deg,#334155,#64748b)}
+h2{font-size:28px;margin:10px 0 14px} h3{font-size:21px;margin:0 0 8px}
+.muted{color:var(--muted)}.story{font-size:24px;font-weight:900;margin:3px 0}.city{font-weight:bold;color:var(--green)}.date{color:var(--muted);font-size:14px}
+.btn{display:inline-block;text-decoration:none;color:#07111f;background:var(--gold);border-radius:14px;padding:11px 14px;font-weight:900;margin:8px 5px 0 0}.btn.bluebtn{background:var(--blue)}.btn.greenbtn{background:var(--green)}
+.toprow{display:flex;justify-content:space-between;align-items:center;gap:10px}.homebtn{border:1px solid var(--line);background:#142541;color:white;border-radius:14px;padding:10px 14px;font-weight:bold}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:rgba(7,17,31,.98);border-top:1px solid var(--line);display:flex;justify-content:space-around;gap:4px;padding:8px 4px;z-index:20}
+.bottom button{background:none;border:0;color:white;text-align:center;font-size:12px;min-width:48px;cursor:pointer}.bottom button.active{color:var(--gold)}.bottom .ico{display:block;font-size:22px}
+table{width:100%;border-collapse:collapse}td,th{padding:12px;border-bottom:1px solid var(--line);text-align:right}.total{font-size:20px;font-weight:900;color:var(--gold)}
+.check label{display:block;padding:12px;border-bottom:1px solid var(--line);font-size:17px}.check input{transform:scale(1.25);margin-left:8px}
+.progress{height:14px;background:rgba(255,255,255,.12);border-radius:999px;overflow:hidden}.bar{height:100%;background:linear-gradient(90deg,var(--green),var(--gold));width:0%}
+</style>
+</head>
+<body>
+<header>
+  <div style="letter-spacing:.16em;font-size:12px;color:#dbeafe">HARAMATI WORLD CUP TOUR</div>
+  <h1>מסע משפחת הרמתי</h1>
+  <p>מונדיאל 2026 · פילדלפיה · ניו יורק · בוסטון · מיאמי</p>
+</header>
+
+<main class="wrap">
+<section class="screen active" id="home">
+  <div class="card">
+    <div class="date">האירוע הבא</div>
+    <div class="story">המפגש</div>
+    <p>נחיתה ב־JFK, מעבר לפילדלפיה, ומפגש עם עמרי וגלעד.</p>
+    <p><b>04:55</b> נחיתה ב־JFK · <b>ערב</b> Whistlers Inn + Cherry Hill Mall</p>
+  </div>
+  <div class="card">
+    <h3>הכנות לטיול</h3>
+    <div class="progress"><div class="bar" id="progressBar"></div></div>
+    <p class="muted" id="progressText">מתעדכן לפי הצ׳קליסט</p>
+  </div>
+  <div class="grid">
+    <button class="tile blue" data-screen="journey"><span>🗓️</span><b>מסע</b><small>כל ימי הטיול</small></button>
+    <button class="tile gold" data-screen="matches"><span>⚽</span><b>משחקים</b><small>שמינית ורבעים</small></button>
+    <button class="tile green" data-screen="hotels"><span>🏨</span><b>מלונות</b><small>כתובות וניווט</small></button>
+    <button class="tile purple" data-screen="transport"><span>✈️</span><b>תחבורה</b><small>טיסות, Uber, Amtrak</small></button>
+    <button class="tile red" data-screen="docs"><span>📂</span><b>מסמכים</b><small>אישורים והזמנות</small></button>
+    <button class="tile blue" data-screen="family"><span>👨‍👦‍👦</span><b>משפחה</b><small>ניר, עמרי, גלעד</small></button>
+    <button class="tile gray" data-screen="budget"><span>💰</span><b>תקציב</b><small>כולל סה״כ</small></button>
+    <button class="tile green" data-screen="checklist"><span>✅</span><b>צ׳קליסט</b><small>סימון נשמר</small></button>
+  </div>
+</section>
+
+<section class="screen" id="journey"><div class="toprow"><h2>מסע</h2><button class="homebtn" data-screen="home">בית</button></div><div class="grid">
+<div class="card"><div class="date">02/07</div><div class="story">המפגש</div><div class="city">פילדלפיה</div><p>נחיתה, מעבר למלון, ערב רגוע.</p></div>
+<div class="card"><div class="date">03/07</div><div class="story">יום טיול עם פיל דל ופיה</div><div class="city">פילדלפיה</div><p>Independence Hall, Liberty Bell, Reading Terminal Market, מדרגות רוקי.</p></div>
+<div class="card"><div class="date">04/07</div><div class="story">שמינית ועצמאות!</div><div class="city">פילדלפיה</div><p>שמינית גמר · Lincoln Financial Field · 17:00</p></div>
+<div class="card"><div class="date">05/07</div><div class="story">שמינית בתפוח הגדול!</div><div class="city">ניו יורק</div><p>מונית בבוקר לניו יורק, משחק ב־MetLife · 16:00.</p></div>
+<div class="card"><div class="date">06/07</div><div class="story">מחכים לפיטר לוגר...</div><div class="city">ניו יורק</div><p>Lower Manhattan, DUMBO, Peter Luger · 20:15.</p></div>
+<div class="card"><div class="date">07/07</div><div class="story">גם בניו יורק יש אופניים...</div><div class="city">מנהטן</div><p>08:45–10:45 רכיבה בסנטרל פארק.</p></div>
+<div class="card"><div class="date">08/07</div><div class="story">טרם נקבע</div><div class="city">בוסטון</div><p>Amtrak מניו יורק לבוסטון – טרם הוזמן.</p></div>
+<div class="card"><div class="date">09/07</div><div class="story">רבע במסצ'וסטס!</div><div class="city">בוסטון</div><p>רבע גמר · Gillette Stadium · 16:00</p></div>
+<div class="card"><div class="date">10/07</div><div class="story">טיסת פנים לפנים</div><div class="city">מיאמי</div><p>בוסטון → מיאמי · 06:00 · Henrosa Hotel.</p></div>
+<div class="card"><div class="date">11/07</div><div class="story">רבע במיאמי ביץ!</div><div class="city">מיאמי</div><p>רבע גמר · Hard Rock Stadium · 17:00</p></div>
+<div class="card"><div class="date">12/07</div><div class="story">טרם נקבע</div><div class="city">פיצול חזרה</div><p>ניר לישראל, עמרי לברלין, גלעד נשאר בארה״ב.</p></div>
+</div></section>
+
+<section class="screen" id="matches"><div class="toprow"><h2>משחקים</h2><button class="homebtn" data-screen="home">בית</button></div><div class="grid">
+<div class="card"><h3>שמינית גמר</h3><p>04/07 · 17:00 · Lincoln Financial Field</p><p class="muted">נבחרות יתווספו כשיתפרסמו</p><a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Lincoln+Financial+Field">נווט</a></div>
+<div class="card"><h3>שמינית גמר</h3><p>05/07 · 16:00 · MetLife Stadium</p><p class="muted">נבחרות יתווספו כשיתפרסמו</p><a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=MetLife+Stadium">נווט</a></div>
+<div class="card"><h3>רבע גמר</h3><p>09/07 · 16:00 · Gillette Stadium</p><p class="muted">נבחרות יתווספו כשיתפרסמו</p><a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Gillette+Stadium">נווט</a></div>
+<div class="card"><h3>רבע גמר</h3><p>11/07 · 17:00 · Hard Rock Stadium</p><p class="muted">נבחרות יתווספו כשיתפרסמו</p><a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Hard+Rock+Stadium+Miami">נווט</a></div>
+</div></section>
+
+<section class="screen" id="hotels"><div class="toprow"><h2>מלונות</h2><button class="homebtn" data-screen="home">בית</button></div><div class="grid">
+<div class="card"><h3>פילדלפיה</h3><p>Sleep Inn Cinnaminson – Philadelphia East<br>02–05/07 · ₪3,966</p><a class="btn bluebtn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Sleep+Inn+Cinnaminson+Philadelphia+East">נווט</a></div>
+<div class="card"><h3>ניו יורק</h3><p>Hampton Inn Manhattan–35th St Empire State Bldg<br>59 West 35th Street · 05–08/07 · ₪4,074<br><span class="muted">ארוחת בוקר כלולה</span></p><a class="btn bluebtn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Hampton+Inn+Manhattan+35th+St+Empire+State+Bldg">נווט</a></div>
+<div class="card"><h3>בוסטון</h3><p>231 Savin Hill Avenue<br>08–10/07 · ₪1,832</p><a class="btn bluebtn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=231+Savin+Hill+Avenue+Boston">נווט</a></div>
+<div class="card"><h3>מיאמי</h3><p>Henrosa Hotel<br>1435 Collins Ave · 10–12/07 · ₪3,390</p><a class="btn bluebtn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Henrosa+Hotel+1435+Collins+Ave+Miami+Beach">נווט</a></div>
+</div></section>
+
+<section class="screen" id="transport"><div class="toprow"><h2>תחבורה</h2><button class="homebtn" data-screen="home">בית</button></div><div class="grid">
+<div class="card"><h3>05/07 · פילדלפיה → ניו יורק</h3><p>המלצה: Uber / Uber Reserve בבוקר.</p><a class="btn greenbtn" target="_blank" href="https://www.uber.com/">פתח Uber</a></div>
+<div class="card"><h3>08/07 · ניו יורק → בוסטון</h3><p>Amtrak מ־Penn Station ל־Boston South Station. טרם הוזמן.</p><a class="btn greenbtn" target="_blank" href="https://www.amtrak.com/">פתח Amtrak</a></div>
+<div class="card"><h3>10/07 · בוסטון → מיאמי</h3><p>American Airlines · 06:00 · הזמנה 5K3R1J6</p></div>
+<div class="card"><h3>11/07 · מיאמי → Hard Rock</h3><p>Uber/Lyft, לצאת מוקדם עקב עומסים.</p></div>
+</div></section>
+
+<section class="screen" id="docs"><div class="toprow"><h2>מסמכים</h2><button class="homebtn" data-screen="home">בית</button></div><div class="grid">
+<div class="card"><h3>אישור Hampton Inn ניו יורק</h3><p class="muted">מלון · 05–08/07</p></div>
+<div class="card"><h3>אישור Henrosa מיאמי</h3><p class="muted">מלון · 10–12/07</p></div>
+<div class="card"><h3>Peter Luger</h3><p class="muted">Resy · 06/07 · 20:15</p></div>
+<div class="card"><h3>רכבת לבוסטון</h3><p class="muted">טרם הוזמן</p></div>
+</div></section>
+
+<section class="screen" id="family"><div class="toprow"><h2>משפחה</h2><button class="homebtn" data-screen="home">בית</button></div><div class="grid">
+<div class="card"><h3>ניר</h3><p>ישראל → JFK · מיאמי → תל אביב</p></div>
+<div class="card"><h3>עמרי</h3><p>דבלין → פילדלפיה · מיאמי → ברלין</p><p class="muted">916$ הלוך, 954$ חזור</p></div>
+<div class="card"><h3>גלעד</h3><p>מקוסטה ריקה · נשאר בארה״ב</p></div>
+</div></section>
+
+<section class="screen" id="budget"><div class="toprow"><h2>תקציב</h2><button class="homebtn" data-screen="home">בית</button></div><div class="card"><table>
+<tr><th>קטגוריה</th><th>עלות</th></tr>
+<tr><td>טיסות ניר</td><td>₪6,136</td></tr><tr><td>טיסות עמרי</td><td>₪5,610</td></tr><tr><td>כרטיסי משחקים</td><td>₪56,250</td></tr><tr><td>מלונות</td><td>₪13,262</td></tr><tr><td>ESTA</td><td>₪369</td></tr><tr><td>טיסת פנים</td><td>₪1,470</td></tr>
+<tr><td class="total">סה״כ</td><td class="total">₪83,097</td></tr>
+</table></div></section>
+
+<section class="screen" id="checklist"><div class="toprow"><h2>צ׳קליסט</h2><button class="homebtn" data-screen="home">בית</button></div><div class="card check" id="checklistBox">
+<label><input type="checkbox" data-item="passport"> דרכונים</label>
+<label><input type="checkbox" data-item="esta"> ESTA</label>
+<label><input type="checkbox" data-item="tickets"> כרטיסים למשחקים</label>
+<label><input type="checkbox" data-item="insurance"> ביטוח נסיעות</label>
+<label><input type="checkbox" data-item="hotels"> אישורי מלונות</label>
+<label><input type="checkbox" data-item="resy"> אישור Peter Luger ב־Resy</label>
+<label><input type="checkbox" data-item="apps"> אפליקציות Uber / Lyft / Amtrak</label>
+<label><input type="checkbox" data-item="amtrak"> להזמין רכבת ניו יורק → בוסטון</label>
+<label><input type="checkbox" data-item="uber"> לבדוק Uber Reserve ל־05/07</label>
+</div></section>
+</main>
+
+<nav class="bottom">
+<button class="navbtn active" data-screen="home"><span class="ico">🏠</span>בית</button>
+<button class="navbtn" data-screen="journey"><span class="ico">🗓️</span>מסע</button>
+<button class="navbtn" data-screen="matches"><span class="ico">⚽</span>משחקים</button>
+<button class="navbtn" data-screen="hotels"><span class="ico">🏨</span>מלונות</button>
+<button class="navbtn" data-screen="docs"><span class="ico">📂</span>מסמכים</button>
+<button class="navbtn" data-screen="family"><span class="ico">👨‍👦‍👦</span>משפחה</button>
+</nav>
+
+<script>
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.navbtn').forEach(b=>b.classList.toggle('active', b.dataset.screen===id));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.addEventListener('click', e=>{
+  const el=e.target.closest('[data-screen]');
+  if(el) showScreen(el.dataset.screen);
+});
+function updateProgress(){
+  const boxes=[...document.querySelectorAll('#checklistBox input')];
+  const done=boxes.filter(b=>b.checked).length;
+  const pct=boxes.length?Math.round(done/boxes.length*100):0;
+  document.getElementById('progressBar').style.width=pct+'%';
+  document.getElementById('progressText').textContent=`${done} מתוך ${boxes.length} הושלמו · ${pct}%`;
+}
+document.querySelectorAll('#checklistBox input').forEach(box=>{
+  box.checked=localStorage.getItem('hwc26_'+box.dataset.item)==='1';
+  box.addEventListener('change',()=>{
+    localStorage.setItem('hwc26_'+box.dataset.item, box.checked?'1':'0');
+    updateProgress();
+  });
+});
+updateProgress();
+</script>
+</body>
+</html>
