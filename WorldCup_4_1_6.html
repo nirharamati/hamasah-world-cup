@@ -2,12 +2,8 @@
 <html lang="he" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="World Cup">
-<meta name="format-detection" content="telephone=yes">
-<title>World Cup Companion 4.1.7 Production - משפחת הרמתי</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>World Cup Companion 4.1.6 - משפחת הרמתי</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;800;900&display=swap" rel="stylesheet">
@@ -47,49 +43,13 @@ table{width:100%;border-collapse:collapse}td,th{padding:12px;border-bottom:1px s
 
 .home-fab{position:fixed;right:14px;bottom:90px;width:58px;height:58px;border-radius:50%;border:2px solid rgba(251,191,36,.65);background:linear-gradient(135deg,#fbbf24,#f97316);color:#07111f;font-size:25px;font-weight:900;box-shadow:0 16px 38px rgba(0,0,0,.42);z-index:60;cursor:pointer;display:flex;align-items:center;justify-content:center}.home-fab span{font-size:11px;position:absolute;bottom:7px}.home-fab .home-ico{font-size:25px;margin-bottom:10px}.iphone-card{background:linear-gradient(135deg,rgba(2,132,199,.92),rgba(30,64,175,.92))}.iphone-steps{counter-reset:step;display:grid;gap:10px}.iphone-steps div{background:rgba(255,255,255,.1);border:1px solid var(--line);border-radius:16px;padding:12px}.iphone-steps b{color:#fff}.budget-note{color:#fde68a;font-size:13px}.pending-cost{color:#fde68a;font-weight:900}
 
-
-/* 4.1.7 Production iPhone stability */
-html,body{min-height:100%;-webkit-text-size-adjust:100%;}
-body{padding-bottom:calc(98px + env(safe-area-inset-bottom));}
-button,a,input,textarea{-webkit-tap-highlight-color:rgba(251,191,36,.22);touch-action:manipulation;}
-button,.btn,.navbtn{min-height:44px;}
-.bottom{padding-bottom:calc(8px + env(safe-area-inset-bottom));-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);}
-.home-fab{bottom:calc(86px + env(safe-area-inset-bottom));}
-.version{bottom:calc(66px + env(safe-area-inset-bottom));}
-@supports (-webkit-touch-callout:none){
-  body{background:#07111f;}
-  .card{box-shadow:0 10px 24px rgba(0,0,0,.24)}
-  .bottom{position:fixed;}
-}
-@media(max-width:760px){
-  header{padding-top:calc(22px + env(safe-area-inset-top));}
-  header h1{font-size:26px;}
-  .wrap{padding:12px 10px;}
-  .home-grid{grid-template-columns:repeat(2,1fr);gap:10px;}
-  .tile{min-height:104px;padding:14px;border-radius:20px;}
-  .tile span{font-size:28px;margin-bottom:5px;}
-  .tile b{font-size:18px;}
-  .tile small{font-size:12px;line-height:1.25;}
-  .card{border-radius:20px;padding:15px;margin:12px 0;}
-  .hero .story{font-size:26px;}
-  .countdown{font-size:22px;}
-  .bottom{justify-content:space-around;overflow-x:hidden;gap:0;}
-  .navbtn{min-width:auto;flex:1;font-size:11px;padding:4px 0;}
-  .navbtn .ico{font-size:21px;}
-  .home-fab{width:62px;height:62px;right:12px;}
-  .version{display:none;}
-}
-@media(max-width:380px){
-  .home-grid{grid-template-columns:1fr;}
-}
-
 </style>
 </head>
 <body>
 <header>
   <div class="tag">HARAMATI WORLD CUP TOUR</div>
   <h1>מסע משפחת הרמתי</h1>
-  <p>World Cup Companion · Version 4.1.7</p>
+  <p>World Cup Companion · Version 4.1.6</p>
 </header>
 
 <main class="wrap">
@@ -122,7 +82,7 @@ button,.btn,.navbtn{min-height:44px;}
   <div class="card compact-card home-alert">
     <div class="topline"><b>✅ 4.1.5 Focus</b><span class="badge">בלי למחוק מידע</span></div>
     <p>הגרסה הזו משמרת את כל 4.1.4 ומוסיפה שכבת בדיקה ולו״ז יומי מדויק יותר.</p>
-    <p class="muted">Travel Wallet · Today Hub · מסמכים · מונדיאל 2026</p>
+    <p class="muted">Travel Wallet · Today Hub · קישורי מסמכים · בדיקות</p>
   </div>
 
   <div class="card">
@@ -160,6 +120,8 @@ button,.btn,.navbtn{min-height:44px;}
     <button class="tile gray" onclick="show('budget')"><span>💰</span><b>תקציב</b><small>מוגן בקוד</small></button>
     <button class="tile green" onclick="show('checklist')"><span>✅</span><b>צ׳קליסט</b><small>מה נשאר לסגור</small></button>
     <button class="tile red" onclick="show('emergency')"><span>🚨</span><b>חירום</b><small>מספרים וקונסוליה</small></button>
+    <button class="tile gray" onclick="show('checks')"><span>🔎</span><b>בדיקות</b><small>קישורים ומסמכים</small></button>
+    <button class="tile blue" onclick="show('iphone')"><span>📱</span><b>iPhone</b><small>פתיחה נכונה בטלפון</small></button>
     <button class="tile gray" onclick="show('release')"><span>🧾</span><b>מה חדש</b><small>Release Notes</small></button>
   </div>
 </section>
@@ -306,23 +268,36 @@ button,.btn,.navbtn{min-height:44px;}
 </div></section>
 
 
+<section class="screen" id="checks"><button class="backbtn" onclick="show('home')">בית</button><h2>בדיקות</h2>
+<div class="card"><h3>🔎 בדיקת קישורים ומסמכים</h3><p class="muted">רשימת בדיקה ידנית לפני הנסיעה. קובץ HTML לא יכול לדעת אם PDF באמת נמצא במכשיר, אבל הוא מציג מה אמור להיות בתיקיית documents.</p><div id="docCheckList" class="today-list"></div></div>
+<div class="card"><h3>📦 כלל גרסאות</h3><p>4.1.5 נבנתה על בסיס 4.1.4: לא נמחקו מסכים קיימים, ונוספו בדיקות ולו״ז יומי.</p></div>
+</section>
 
 
-<section class="screen" id="release"><button class="backbtn" onclick="show('home')">בית</button><h2>מה חדש ב־4.1.7</h2>
-<div class="card"><h3>🧾 Release Notes</h3><ul class="release-list"><li>גרסת Production נקייה: מסכי iPhone ובדיקות הוסרו מהניווט ומהבית.</li><li>נשארת גרסת פיתוח פנימית בנפרד, אבל הקובץ הזה מיועד לשימוש אמיתי בטיול.</li><li>שופר מבנה הניווט באייפון: חמישה כפתורים ראשיים בלבד בתחתית.</li><li>נוספו התאמות iOS: safe-area, כפתורי מגע גדולים יותר, viewport-fit ו־Apple Web App meta.</li><li>כפתור הבית הצף נשאר בולט ונגיש.</li><li>נשמרו כל מסכי 4.1.6 החשובים: בית, Today Hub, מסע, משחקים, מלונות, Travel Wallet, תחבורה, משפחה, תקציב, צ׳קליסט וחירום.</li></ul></div>
+<section class="screen" id="iphone"><button class="backbtn" onclick="show('home')">בית</button><h2>פתיחה באייפון</h2>
+<div class="card iphone-card"><h3>📱 מצב iPhone</h3><p>האתר עצמו עובד כקובץ HTML יחיד. הבעיה באייפון בדרך כלל נוצרת כשפותחים רק את ה־HTML בלי תיקיית <b>documents</b>, ולכן קבצי PDF לא נפתחים.</p></div>
+<div class="card"><h3>הדרך המומלצת</h3><div class="iphone-steps"><div><b>1.</b> צור תיקייה בשם <b>WorldCup</b>.</div><div><b>2.</b> שים בתוכה את <b>WorldCup_4_1_6.html</b> ואת תיקיית <b>documents</b>.</div><div><b>3.</b> העלה את כל התיקייה ל־iCloud Drive או Google Drive, ולא רק את קובץ ה־HTML.</div><div><b>4.</b> באייפון פתח את הקובץ דרך Files / Drive. אם PDF לא נפתח, פתח אותו קודם מתוך אותה תיקיית documents.</div></div></div>
+<div class="card"><h3>פתרון הכי יציב להמשך</h3><p>בגרסה הבאה אפשר להכין גם <b>חבילת ZIP</b> מסודרת: אתר + תיקיית documents. זו הדרך הנכונה להעביר לאייפון בלי לאבד מסמכים.</p><p class="muted">אפשרות נוספת: להעלות את האתר והמסמכים לכתובת אינטרנט אחת, ואז הכול יעבוד כמו אתר רגיל.</p></div>
+</section>
+<section class="screen" id="release"><button class="backbtn" onclick="show('home')">בית</button><h2>מה חדש ב־4.1.6</h2>
+<div class="card"><h3>🧾 Release Notes</h3><ul class="release-list"><li>נשמר תיקון Travel Wallet מ־4.1.4: קישורי PDF אמיתיים למסמכי המלונות וה־ESTA.</li><li>נוסף סעיף תקציב לטיסות גלעד, מסומן כטרם הוזן ולא נכלל בסה״כ הידוע.</li><li>כפתור הבית הובלט עם כפתור צף קבוע בצד המסך.</li><li>נוסף מסך iPhone עם הנחיות פתיחה נכונה ושמירת תיקיית documents לצד האתר.</li><li>נוסף Today Hub מורחב עם לו״ז יומי דינמי לכל יום במסע.</li><li>נוספו תמונות רקע לאצטדיונים במסך Match Center.</li><li>נוסף מסך בדיקות למסמכים וקישורים לפני נסיעה.</li><li>נוספו תגיות "מסמך קיים" / "מסמך חסר" כדי שלא תצטרך לנחש מה נמצא.</li><li>עודכן מסך המלונות עם כפתורי "הצג אישור" ליד כפתורי הניווט.</li><li>נשמרו שדרוגי 4.1.3: חירום, Memory Note, City Snapshot ו־Trip Stats.</li><li>נוספה הערה חשובה: קובצי PDF צריכים להישאר בתיקיית documents ליד קובץ האתר.</li></ul></div>
 <div class="card"><h3>המשך מוצע</h3><p>ב־4.1.6 נוסיף קבצים נוספים שתעלה בפועל: טיסות, ביטוח, כרטיסי משחקים ו־ESTA לניר/גלעד.</p></div></section>
 
 </main>
 
-<nav class="bottom" aria-label="ניווט ראשי">
+<nav class="bottom">
 <button class="navbtn active" onclick="show('home')"><span class="ico">🏠</span>בית</button>
-<button class="navbtn" onclick="show('today')"><span class="ico">🎯</span>היום</button>
 <button class="navbtn" onclick="show('journey')"><span class="ico">🗓️</span>מסע</button>
+<button class="navbtn" onclick="show('today')"><span class="ico">🎯</span>היום</button>
 <button class="navbtn" onclick="show('matches')"><span class="ico">⚽</span>משחקים</button>
+<button class="navbtn" onclick="show('hotels')"><span class="ico">🏨</span>מלונות</button>
 <button class="navbtn" onclick="show('docs')"><span class="ico">🎫</span>Wallet</button>
+<button class="navbtn" onclick="show('iphone')"><span class="ico">📱</span>iPhone</button>
+<button class="navbtn" onclick="show('emergency')"><span class="ico">🚨</span>חירום</button>
+<button class="navbtn" onclick="show('family')"><span class="ico">👨‍👦‍👦</span>משפחה</button>
 </nav>
 <button class="home-fab" onclick="show('home')" aria-label="בית"><span class="home-ico">🏠</span><span>בית</span></button>
-<div class="version">World Cup Companion · 4.1.7</div>
+<div class="version">World Cup Companion · 4.1.6</div>
 
 <script>
 function show(id){
@@ -330,7 +305,7 @@ function show(id){
   const screen=document.getElementById(id);
   if(screen) screen.classList.add('active');
   document.querySelectorAll('.navbtn').forEach(b=>b.classList.remove('active'));
-  const labels={home:0,today:1,journey:2,matches:3,docs:4,hotels:undefined,transport:undefined,emergency:undefined,family:undefined,budget:undefined,checklist:undefined,release:undefined};
+  const labels={home:0,journey:1,today:2,matches:3,hotels:4,docs:5,iphone:6,emergency:7,family:8,checks:undefined,release:undefined};
   if(labels[id]!==undefined) document.querySelectorAll('.navbtn')[labels[id]].classList.add('active');
   window.scrollTo(0,0);
 }
